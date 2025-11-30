@@ -6,7 +6,7 @@ import logging
 import json
 import hashlib
 import vertexai
-from vertexai.generative_models import GenerativeModel
+from vertexai.generative_models import GenerativeModel, Content, Part
 
 # ----------------------
 # Logging Setup
@@ -124,19 +124,23 @@ async def chat_with_gemini(session_id: str, user_message: str) -> str:
         system_instruction=system_instruction
     )
     
-    # Build chat history for Gemini
+    # Build chat history using Content objects
     history = []
     for msg in memory:
         if msg["role"] == "user":
-            history.append({
-                "role": "user",
-                "parts": [{"text": msg["text"]}]
-            })
+            history.append(
+                Content(
+                    role="user",
+                    parts=[Part.from_text(msg["text"])]
+                )
+            )
         elif msg["role"] == "assistant":
-            history.append({
-                "role": "model",  # Gemini uses "model" not "assistant"
-                "parts": [{"text": msg["text"]}]
-            })
+            history.append(
+                Content(
+                    role="model",
+                    parts=[Part.from_text(msg["text"])]
+                )
+            )
     
     # Privacy-safe logging - only metadata
     logger.info(f"Session {session_hash}: {len(history)} messages in context")
