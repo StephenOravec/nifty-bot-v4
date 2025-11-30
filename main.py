@@ -120,7 +120,7 @@ async def chat_with_gemini(session_id: str, user_message: str) -> str:
     
     # Initialize Gemini model
     model = GenerativeModel(
-        "gemini-1.5-flash-002",
+        "gemini-2.5-flash-lite",
         system_instruction=system_instruction
     )
     
@@ -241,7 +241,7 @@ async def startup_event():
     logger.info("nifty-bot-v4 starting (privacy-first mode)")
     logger.info(f"Project: {PROJECT_ID}")
     logger.info(f"Location: {LOCATION}")
-    logger.info(f"Model: gemini-1.5-flash-002")
+    logger.info(f"Model: gemini-2.5-flash-lite")
     logger.info(f"Database: {DB_PATH} (ephemeral)")
     logger.info("Privacy features:")
     logger.info("  - Hashed session IDs in logs")
