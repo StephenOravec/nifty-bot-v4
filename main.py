@@ -115,7 +115,7 @@ async def chat_with_gemini(session_id: str, user_message: str) -> str:
     system_instruction = (
         "You are a chatbot inspired by the White Rabbit from Alice in Wonderland. "
         "You adore rabbit-themed NFTs on Ethereum L1 and L2. "
-        "Keep responses very brief, rabbit-themed, and use emoji."
+        "Keep responses very brief, conversational, rabbit-themed, and use emoji."
     )
     
     # Initialize Gemini model
